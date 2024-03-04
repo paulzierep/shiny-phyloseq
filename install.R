@@ -11,6 +11,10 @@ if(compareVersion(R_version, R_min_version) < 0){
 }
 # install or update BiocManager. Updates sometimes needed as they change in-step with BioC vers
 # install.packages("BiocManager")
+if(!require(BiocManager)){
+    install.packages("BiocManager")
+}
+
 ################################################################################
 # Install basic required packages if not available/installed.
 ################################################################################
