@@ -89,14 +89,23 @@ env_psdata = new.env()
 # Keep server-loaded data into a special environemnt, `env_psdata`
 data(list=c("GlobalPatterns", "enterotype", "esophagus"), envir = env_psdata)
 load("data/kostic.RData", envir = env_psdata)
-# load("data/kostic_copy.RData", envir = env_psdata)
 load("data/1457_uparse.RData", envir = env_psdata)
 attach(env_psdata)
+
+# load Galaxy input from env using rds instead of Rdata since its more light weight
+galaxy_input_folder <- Sys.getenv('SHINY_INPUT_DIR')
+galaxy_files <- list.files(path=galaxy_input_folder, pattern="*.rds", full.names=TRUE, recursive=FALSE)
+file_path <- galaxy_files[[1]]
+#print(galaxy_files)
+#print(file_path)
+galaxy_input <- readRDS(file_path)
+
+
 # Define initial list of available datasets
 datalist = list(
+  Galaxy_Input = galaxy_input,
   closed_1457_uparse = closed_1457_uparse,
   study_1457_Kostic = kostic,
-  # study_1457_Kostic_copy = extra_data,
   GlobalPatterns = GlobalPatterns,
   enterotype = enterotype,
   esophagus = esophagus)
