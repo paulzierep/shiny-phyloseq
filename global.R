@@ -101,6 +101,7 @@ galaxy_input_folder <- Sys.getenv('SHINY_INPUT_DIR')
 galaxy_files <- list.files(path=galaxy_input_folder, full.names=TRUE, recursive=FALSE)
 
 if (rlang::is_empty(galaxy_files)) {
+  galaxy_debug <- galaxy_files
   write(paste("No rds files found in dir: ", galaxy_input_folder), stdout())
   write(paste("No rds files found in dir: ", galaxy_input_folder), stderr())
   # No galaxy input found
@@ -112,6 +113,7 @@ if (rlang::is_empty(galaxy_files)) {
     enterotype = enterotype,
     esophagus = esophagus)
 } else {
+  galaxy_debug <- str(galaxy_files[[1]])
   write(paste("Using rdf file: ", galaxy_files[[1]]), stdout())
   write(paste("Using rdf file: ", galaxy_files[[1]]), stderr())
   # galaxy input found
