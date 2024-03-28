@@ -102,6 +102,7 @@ galaxy_files <- list.files(path=galaxy_input_folder, full.names=TRUE, recursive=
 
 if (rlang::is_empty(galaxy_files)) {
   write(paste("No rds files found in dir: ", galaxy_input_folder), stdout())
+  write(paste("No rds files found in dir: ", galaxy_input_folder), stderr())
   # No galaxy input found
   # Define initial list of available datasets
   datalist = list(
@@ -112,6 +113,7 @@ if (rlang::is_empty(galaxy_files)) {
     esophagus = esophagus)
 } else {
   write(paste("Using rdf file: ", galaxy_files[[1]]), stdout())
+  write(paste("Using rdf file: ", galaxy_files[[1]]), stderr())
   # galaxy input found
   # get first RDS in folder
   file_path <- galaxy_files[[1]]
