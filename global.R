@@ -92,23 +92,41 @@ load("data/kostic.RData", envir = env_psdata)
 load("data/1457_uparse.RData", envir = env_psdata)
 attach(env_psdata)
 
+###################### Galaxy Hack ######################
+
 # load Galaxy input from env using rds instead of Rdata since its more light weight
+# This env variable must be set in the Galaxy Wrapper and must contain one rds fiole containing a phyloseq object
+# It can also be tested via the docker image using the folder as volume
 galaxy_input_folder <- Sys.getenv('SHINY_INPUT_DIR')
 galaxy_files <- list.files(path=galaxy_input_folder, pattern="*.rds", full.names=TRUE, recursive=FALSE)
-file_path <- galaxy_files[[1]]
-#print(galaxy_files)
-#print(file_path)
-galaxy_input <- readRDS(file_path)
 
+if (rlang::is_empty(galaxy_files)) {
+  # No galaxy input found
+  # Define initial list of available datasets
+  datalist = list(
+    closed_1457_uparse = closed_1457_uparse,
+    study_1457_Kostic = kostic,
+    GlobalPatterns = GlobalPatterns,
+    enterotype = enterotype,
+    esophagus = esophagus)
+} else {
+  # galaxy input found
+  # get first RDS in folder
+  file_path <- galaxy_files[[1]]
+  galaxy_input <- readRDS(file_path)
+  
+  # Define initial list of available datasets
+  datalist = list(
+    Galaxy_Input = galaxy_input,
+    closed_1457_uparse = closed_1457_uparse,
+    study_1457_Kostic = kostic,
+    GlobalPatterns = GlobalPatterns,
+    enterotype = enterotype,
+    esophagus = esophagus)
+}
 
-# Define initial list of available datasets
-datalist = list(
-  Galaxy_Input = galaxy_input,
-  closed_1457_uparse = closed_1457_uparse,
-  study_1457_Kostic = kostic,
-  GlobalPatterns = GlobalPatterns,
-  enterotype = enterotype,
-  esophagus = esophagus)
+###################### Galaxy Hack end ######################
+
 ########################################
 # Plot Rendering Stuff.
 ########################################
