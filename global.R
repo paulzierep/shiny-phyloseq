@@ -98,7 +98,7 @@ attach(env_psdata)
 # This env variable must be set in the Galaxy Wrapper and must contain one rds fiole containing a phyloseq object
 # It can also be tested via the docker image using the folder as volume
 galaxy_input_folder <- Sys.getenv('SHINY_INPUT_DIR')
-galaxy_files <- list.files(path=galaxy_input_folder, pattern="*.rds", full.names=TRUE, recursive=FALSE)
+galaxy_files <- list.files(path=galaxy_input_folder, full.names=TRUE, recursive=FALSE)
 
 if (rlang::is_empty(galaxy_files)) {
   write(paste("No rds files found in dir: ", galaxy_input_folder), stdout())
