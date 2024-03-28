@@ -14,7 +14,7 @@ sbp_data = sidebarPanel(
 )
 
 datapage = fluidPage(
-  headerPanel(paste("Galaxy Error: ", galaxy_debug)),
+  # headerPanel(paste("Galaxy Error: ", galaxy_debug)),
   headerPanel("Dataset Upload and Selection"),
   sbp_data,
   column(width = 8,
