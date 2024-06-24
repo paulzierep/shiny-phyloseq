@@ -14,7 +14,7 @@ sbp_data = sidebarPanel(
 )
 
 datapage = fluidPage(
-  headerPanel(paste("Galaxy Error: ", galaxy_input_folder)),
+  # headerPanel(paste("Galaxy Error: ", galaxy_input_folder)), #<- can be used to dirtily output Errors directly to the UI
   headerPanel("Dataset Upload and Selection"),
   sbp_data,
   column(width = 8,
