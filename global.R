@@ -95,7 +95,7 @@ attach(env_psdata)
 ###################### Galaxy Hack ######################
 
 # load Galaxy input from env using rds instead of Rdata since its more light weight
-# This env variable must be set in the Galaxy Wrapper and must contain one rds fiole containing a phyloseq object
+# This env variable must be set in the Galaxy Wrapper and must contain one rds file containing a phyloseq object
 # It can also be tested via the docker image using the folder as volume
 galaxy_input_folder <- Sys.getenv('SHINY_INPUT_DIR')
 galaxy_files <- list.files(path=galaxy_input_folder, full.names=TRUE, recursive=FALSE)
