@@ -43,7 +43,7 @@ dim_and_down = function(suffix, secTitle='Dimensions & Download'){
     div(class="col-md-3", numericInputRow(paste0("height", suffix), "Height", 8, 1, 100, 1, class="col-md-12")),
     div(class='col-md-3', graphicTypeUI(paste0("downtype", suffix))),
     div(class='col-md-2', div(style="display:inline-block", tags$label("DL"), downloadButton(paste0("download", suffix), '  '))),
-    div(class='col-md-2', div(style="display:inline-block", tags$label("Galaxy"), actionButton(paste0("store", suffix), 'Save to Galaxy')))
+    div(class='col-md-2', div(style="display:inline-block", tags$label("Galaxy"), actionButton(paste0("store", suffix), 'Save to Galaxy'))),
     div(class='col-md-2', div(style="display:inline-block", tags$label("Close"), actionButton("close", 'Close app')))
   ))
 }
