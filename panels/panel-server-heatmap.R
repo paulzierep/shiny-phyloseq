@@ -66,3 +66,7 @@ observeEvent(input$store_heat, {
             width=input$width_heat, height=input$height_heat, dpi=300L, units="in")
 
 })
+
+observeEvent(input$close, {
+    stopApp()
+})
