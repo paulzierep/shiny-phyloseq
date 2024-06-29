@@ -19,8 +19,8 @@ uialpha = function(id, ...){
 }
 # UI function to define palettes. Reused in many panels.
 uipal = function(id, default="Set1"){
-  selectInput(id, "Palette",  
-              choices = rownames(RColorBrewer::brewer.pal.info), 
+  selectInput(id, "Palette",
+              choices = rownames(RColorBrewer::brewer.pal.info),
               selected = default
   )
 }
@@ -43,9 +43,11 @@ dim_and_down = function(suffix, secTitle='Dimensions & Download'){
     div(class="col-md-3", numericInputRow(paste0("height", suffix), "Height", 8, 1, 100, 1, class="col-md-12")),
     div(class='col-md-3', graphicTypeUI(paste0("downtype", suffix))),
     div(class='col-md-2', div(style="display:inline-block", tags$label("DL"), downloadButton(paste0("download", suffix), '  '))),
-    div(class='col-md-2', div(style="display:inline-block", tags$label("Galaxy Export"), downloadButton(paste0("download", suffix), '  ')))
+    div(class='col-md-2', div(style="display:inline-block", tags$label("Galaxy"), actionButton(paste0("store", suffix), 'Save to Galaxy')))
+
   ))
 }
+
 # Theme and details. Some elements are optional. Suffix is required.
 # Attempts to return a single row with palette, theme, and optionally point-size and opacity.
 # `addList` is a list of additional elements for UI, attempt to add to row.
@@ -55,12 +57,12 @@ theme_ui_details = function(suffix, secTitle="Details", pal=TRUE, them=TRUE,
   if(pal){
     elementList <- c(elementList, list(
       div(class='col-md-4', uipal(paste0("pal", suffix)))
-    ))    
+    ))
   }
   if(them){
     elementList <- c(elementList, list(
       div(class='col-md-4', uitheme(paste0("theme", suffix)))
-    ))     
+    ))
   }
   if(ptsz){
     elementList <- c(elementList, list(
@@ -76,7 +78,7 @@ theme_ui_details = function(suffix, secTitle="Details", pal=TRUE, them=TRUE,
   elementList <- c(elementList, addList)
   return(fluidRow(do.call("column", args = elementList)))
 }
-# # Generic fluid row-split. r is number of elements in a row (max 12). 
+# # Generic fluid row-split. r is number of elements in a row (max 12).
 # ui_row_split = function(..., r=2L){
 #   elementList = list(width = 12L)
 #   spanN = paste0("col-md-", floor(12/r))
@@ -88,9 +90,9 @@ theme_ui_details = function(suffix, secTitle="Details", pal=TRUE, them=TRUE,
 # Generic distance UI stuff.
 ################################################################################
 #   Function to reate ui for distance method selection
-#   NOTE: not all distance methods are supported if "taxa" selected for type. 
-#   For example, the UniFrac distance and DPCoA cannot be calculated for taxa-wise 
-#   distances, because they use a taxa-wise tree as part of their calculation 
+#   NOTE: not all distance methods are supported if "taxa" selected for type.
+#   For example, the UniFrac distance and DPCoA cannot be calculated for taxa-wise
+#   distances, because they use a taxa-wise tree as part of their calculation
 #   between samples, and there is no transpose-equivalent for this tree
 uidist = function(id, selected="bray"){
   return(selectInput(id, "Distance", distlist, selected=selected))
@@ -120,10 +122,10 @@ make_fluidpage = function(fptitle="", sbp, outplotid, markdownDoc=""){
     # If md doc specified, replace `mdRow` with actual doc.
     mdRow <- fluidRow(column(width = 12,
       includeMarkdown(file.path("panels/paneldoc", markdownDoc))
-    )) 
+    ))
   }
   fluidPage(
-    headerPanel(fptitle, "windowTitle"), 
+    headerPanel(fptitle, "windowTitle"),
     fluidRow(sbp, column(width=8, plotOutput(outplotid))),
     mdRow
   )
@@ -146,12 +148,12 @@ source("panels/panel-ui-provenance.R", local = TRUE)
 ################################################################################
 transpage = fluidPage(
   headerPanel("Transform Widget Documentation"),
-  fluidRow(column(width = 12, 
+  fluidRow(column(width = 12,
                   includeMarkdown("panels/paneldoc/Transform.md")
   ))
 )
 ################################################################################
-# Define general header tag list 
+# Define general header tag list
 # List of tags to display as a common header above all tabPanels.
 ################################################################################
 headerTagList = list(
