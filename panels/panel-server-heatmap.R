@@ -58,3 +58,10 @@ output$download_heat <- downloadHandler(
             width=input$width_heat, height=input$height_heat, dpi=300L, units="in")
   }
 )
+
+observeEvent(input$store_heat, {
+      ggsave2(file.path(Sys.getenv('SHINY_OUTPUT_DIR'), paste0("Heatmap_", simpletime(), ".", input$downtype_heat)),
+            plot=make_heatmap(),
+            device=input$downtype_heat,
+            width=input$width_heat, height=input$height_heat, dpi=300L, units="in")
+})
