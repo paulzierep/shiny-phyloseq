@@ -42,7 +42,7 @@ dim_and_down = function(suffix, secTitle='Dimensions & Download'){
     div(class="col-md-3", numericInputRow(paste0("width", suffix), "Width", 8, 1, 100, 1, class="col-md-12")),
     div(class="col-md-3", numericInputRow(paste0("height", suffix), "Height", 8, 1, 100, 1, class="col-md-12")),
     div(class='col-md-3', graphicTypeUI(paste0("downtype", suffix))),
-    div(class='col-md-2', div(style="display:inline-block", tags$label("DL"), downloadButton(paste0("download", suffix), '  '))),
+    div(class='col-md-2', div(style="display:inline-block", tags$label("DL"), downloadButton(paste0("download", ), '  '))),
     div(class='col-md-2', div(style="display:inline-block", tags$label("Galaxy"), actionButton(paste0("store", suffix), 'Save to Galaxy')))
   ))
 }
@@ -182,3 +182,32 @@ ui = navbarPage(
 )
 shinyUI(ui)
 ################################################################################
+
+##########################################
+# Generic galaxy upload func
+##########################################
+
+save_and_upload_plot <- function(suffix, plot_func) {
+  observeEvent(input[[paste0("store_", suffix)]], {
+    # Define the output file path and name based on the suffix
+    output_file <- file.path(Sys.getenv('SHINY_OUTPUT_DIR'), 
+                             paste0(ucfirst(suffix), "_", simpletime(), ".", input[[paste0("downtype_", suffix)]]))
+
+    # Use ggsave2 to save the plot, using the suffix to determine input values
+    ggsave2(output_file,
+            plot = plot_func(),  # dynamic plot function based on suffix
+            device = input[[paste0("downtype_", suffix)]],
+            width = input[[paste0("width_", suffix)]], 
+            height = input[[paste0("height_", suffix)]], 
+            dpi = 300L, 
+            units = "in")
+
+    # Run system command to upload the file
+    system(paste('put -p', output_file))
+  })
+}
+
+# Helper function to capitalize the suffix for use in filenames
+ucfirst <- function(string) {
+  paste0(toupper(substr(string, 1, 1)), substr(string, 2, nchar(string)))
+}

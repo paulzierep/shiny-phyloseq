@@ -65,3 +65,7 @@ output$download_bar <- downloadHandler(
             width=input$width_bar, height=input$height_bar, dpi=300L, units="in")
   }
 )
+
+# add Galaxy upload
+save_and_upload_plot("bar", finalize_bar_plot)
+
