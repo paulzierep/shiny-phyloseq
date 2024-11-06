@@ -157,3 +157,13 @@ output$download_ord <- downloadHandler(
 #   try(pscree <- plot_ordination(physeq_ord(), get_ord(), type="scree", title = "Scree Plot"), silent=TRUE)
 #   return(shiny_phyloseq_print(pscree))
 # }, width=400, height=250)
+
+observeEvent(input$store_ord, {
+      output_file <- file.path(Sys.getenv('SHINY_OUTPUT_DIR'), paste0("Bar_", simpletime(), ".", input$downtype_ord))
+
+      ggsave2(output_file,
+            plot=finalize_ordination_plot(),
+            device=input$downtype_ord,
+            width=input$width_ord, height=input$height_ord, dpi=300L, units="in")
+      system(paste('put -p ', output_file))
+})
