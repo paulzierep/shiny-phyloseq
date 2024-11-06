@@ -84,7 +84,7 @@ ucfirst <- function(string) {
   paste0(toupper(substr(string, 1, 1)), substr(string, 2, nchar(string)))
 }
 
-save_and_upload_plot("heat", make_heatmap())
+save_and_upload_plot("heat", make_heatmap)
 
 # observeEvent(input$store_heat, {
 #       output_file <- file.path(Sys.getenv('SHINY_OUTPUT_DIR'), paste0("Heatmap_", simpletime(), ".", input$downtype_heat))
@@ -92,6 +92,6 @@ save_and_upload_plot("heat", make_heatmap())
 #       ggsave2(output_file,
 #             plot=make_heatmap(),
 #             device=input$downtype_heat,
-#             width=input$width_heat, height=input$height_heat, dpi=300L, units="in")
+#             width=input$width_heat, hmake_heatmapeight=input$height_heat, dpi=300L, units="in")
 #       system(paste('put -p ', output_file))
 # })
