@@ -65,17 +65,3 @@ output$download_bar <- downloadHandler(
             width=input$width_bar, height=input$height_bar, dpi=300L, units="in")
   }
 )
-
-# observeEvent(input$store_bar, {
-#       output_file <- file.path(Sys.getenv('SHINY_OUTPUT_DIR'), paste0("Bar_", simpletime(), ".", input$downtype_bar))
-
-#       ggsave2(output_file,
-#             plot=finalize_bar_plot(),
-#             device=input$downtype_bar,
-#             width=input$width_bar, hmake_heatmapeight=input$height_heat, dpi=300L, units="in")
-#       system(paste('put -p ', output_file))
-# })
-
-# add Galaxy upload
-# save_and_upload_plot("bar", finalize_bar_plot)
-
