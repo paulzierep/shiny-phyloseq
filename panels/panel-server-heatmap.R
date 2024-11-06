@@ -59,7 +59,7 @@ output$download_heat <- downloadHandler(
   }
 )
 
-save_and_upload_plot <- function(suffix) {
+save_and_upload_plot <- function(suffix, plot_func) {
   observeEvent(input[[paste0("store_", suffix)]], {
     # Define the output file path and name based on the suffix
     output_file <- file.path(Sys.getenv('SHINY_OUTPUT_DIR'), 
@@ -67,7 +67,7 @@ save_and_upload_plot <- function(suffix) {
 
     # Use ggsave2 to save the plot, using the suffix to determine input values
     ggsave2(output_file,
-            plot = get(paste0("make_", suffix))(),  # dynamic plot function based on suffix
+            plot = plot_func(),  # dynamic plot function based on suffix
             device = input[[paste0("downtype_", suffix)]],
             width = input[[paste0("width_", suffix)]], 
             height = input[[paste0("height_", suffix)]], 
@@ -84,7 +84,7 @@ ucfirst <- function(string) {
   paste0(toupper(substr(string, 1, 1)), substr(string, 2, nchar(string)))
 }
 
-save_and_upload_plot("heat")
+save_and_upload_plot("heat", make_heatmap())
 
 # observeEvent(input$store_heat, {
 #       output_file <- file.path(Sys.getenv('SHINY_OUTPUT_DIR'), paste0("Heatmap_", simpletime(), ".", input$downtype_heat))
