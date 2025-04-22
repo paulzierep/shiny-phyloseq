@@ -140,7 +140,7 @@ source("panels/panel-ui-d3.R", local = TRUE)
 source("panels/panel-ui-data.R", local = TRUE)
 source("panels/panel-ui-filter.R", local = TRUE)
 source("panels/panel-ui-palette.R", local = TRUE)
-source("panels/panel-ui-provenance.R", local = TRUE)
+# source("panels/panel-ui-provenance.R", local = TRUE)
 ################################################################################
 # Transform panel is only documentation. Define differently.
 ################################################################################
@@ -175,7 +175,7 @@ ui = navbarPage(
   tabPanel("Bar", barpage),
   tabPanel("Palette", palpage),
   tabPanel("Transform", transpage),
-  tabPanel("Provenance", provpage),
+  # tabPanel("Provenance", provpage),
   header = headerTagList,
   collapsible = TRUE,
   windowTitle = "Shiny-phyloseq"
