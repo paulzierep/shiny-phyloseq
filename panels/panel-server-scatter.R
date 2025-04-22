@@ -105,7 +105,7 @@ output$downloadScatter <- downloadHandler(
 )
 
 observeEvent(input$store_bar, {
-      output_file <- file.path(Sys.getenv('SHINY_OUTPUT_DIR'), paste0("Scatter_", simpletime(), ".", input$downtype_bar))
+      output_file <- file.path(Sys.getenv('SHINY_OUTPUT_DIR'), paste0("Scatter_", simpletime(), ".", input$downtype_scat))
 
       ggsave2(output_file,
             plot=finalize_bar_plot(),

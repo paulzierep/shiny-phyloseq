@@ -89,7 +89,7 @@ output$download_tree <- downloadHandler(
 )
 
 observeEvent(input$store_bar, {
-      output_file <- file.path(Sys.getenv('SHINY_OUTPUT_DIR'), paste0("Tree_", simpletime(), ".", input$downtype_bar))
+      output_file <- file.path(Sys.getenv('SHINY_OUTPUT_DIR'), paste0("Tree_", simpletime(), ".", input$downtype_tree))
 
       ggsave2(output_file,
             plot=finalize_bar_plot(),
