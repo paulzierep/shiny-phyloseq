@@ -92,8 +92,8 @@ observeEvent(input$store_bar, {
       output_file <- file.path(Sys.getenv('SHINY_OUTPUT_DIR'), paste0("Tree_", simpletime(), ".", input$downtype_tree))
 
       ggsave2(output_file,
-            plot=finalize_bar_plot(),
-            device=input$downtype_bar,
-            width=input$width_bar, height=input$height_bar, dpi=300L, units="in")
+            plot=finalize_tree_plot(),
+            device=input$downtype_tree,
+            width=input$width_tree, height=input$height_tree, dpi=300L, units="in")
       system(paste('put -p ', output_file))
 })

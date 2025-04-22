@@ -212,8 +212,8 @@ observeEvent(input$store_bar, {
       output_file <- file.path(Sys.getenv('SHINY_OUTPUT_DIR'), paste0("Network_", simpletime(), ".", input$downtype_net))
 
       ggsave2(output_file,
-            plot=finalize_bar_plot(),
-            device=input$downtype_bar,
-            width=input$width_bar, height=input$height_bar, dpi=300L, units="in")
+            plot=finalize_network_plot(),
+            device=input$downtype_net,
+            width=input$width_net, height=input$height_net, dpi=300L, units="in")
       system(paste('put -p ', output_file))
 })
