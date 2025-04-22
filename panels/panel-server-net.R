@@ -208,7 +208,7 @@ output$download_net <- downloadHandler(
 )
 ################################################################################
 
-observeEvent(input$store_bar, {
+observeEvent(input$store_net, {
       output_file <- file.path(Sys.getenv('SHINY_OUTPUT_DIR'), paste0("Network_", simpletime(), ".", input$downtype_net))
 
       ggsave2(output_file,

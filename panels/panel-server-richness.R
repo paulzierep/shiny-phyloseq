@@ -111,7 +111,7 @@ output$download_rich <- downloadHandler(
   }
 )
 
-observeEvent(input$store_bar, {
+observeEvent(input$store_rich, {
       output_file <- file.path(Sys.getenv('SHINY_OUTPUT_DIR'), paste0("Richness_", simpletime(), ".", input$downtype_rich))
 
       ggsave2(output_file,

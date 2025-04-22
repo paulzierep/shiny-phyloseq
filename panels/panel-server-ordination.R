@@ -159,7 +159,7 @@ output$download_ord <- downloadHandler(
 # }, width=400, height=250)
 
 observeEvent(input$store_ord, {
-      output_file <- file.path(Sys.getenv('SHINY_OUTPUT_DIR'), paste0("Bar_", simpletime(), ".", input$downtype_ord))
+      output_file <- file.path(Sys.getenv('SHINY_OUTPUT_DIR'), paste0("Ordination_", simpletime(), ".", input$downtype_ord))
 
       ggsave2(output_file,
             plot=finalize_ordination_plot(),
